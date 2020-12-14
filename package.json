@@ -1,0 +1,31 @@
+{
+  "name": "excel-diff-yu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huyunan/excel-diff-yu.git"
+  },
+  "keywords": [
+    "excel",
+    "diff",
+    "compare",
+    "excel-diff",
+    "excel-compare",
+    "xlsx"
+  ],
+  "author": "yunan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huyunan/excel-diff-yu/issues"
+  },
+  "homepage": "https://github.com/huyunan/excel-diff-yu#readme",
+  "dependencies": {
+    "exceljs": "^4.2.0",
+    "path": "^0.12.7"
+  }
+}
