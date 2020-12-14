@@ -1,14 +1,14 @@
 {
   "name": "excel-diff-yu",
   "version": "1.0.0",
-  "description": "",
+  "description": "Compare the two Excel files and show the differences.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/huyunan/excel-diff-yu.git"
+    "url": "git://github.com/huyunan/excel-diff-yu.git"
   },
   "keywords": [
     "excel",
