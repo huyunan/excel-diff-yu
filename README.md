@@ -11,7 +11,7 @@ npm istall excel-diff-yu
 ## Usage
 
 ```javascript
-const { excelDiffYu } = require("excel-diff-yu");
+const { ExcelDiffYu } = require("excel-diff-yu");
 
-excelDiffYu({ pathA: "test_a.xlsx", pathB: "test_b.xlsx" });
+ExcelDiffYu({ pathA: "test_a.xlsx", pathB: "test_b.xlsx" });
 ```

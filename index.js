@@ -2,15 +2,15 @@
 
 const { Workbook } = require("exceljs");
 const path = require('path');
+const _ = require('lodash');
 
 const DEFAULT_PATH_A = './test_a.xlsx';
 const DEFAULT_PATH_B = './test_b.xlsx';
 
-async function excelDiffYu(options) {
+async function ExcelDiffYu(options) {
     const { excel_workbook_a, excel_workbook_b } = await readExcel(options);
     const { worksheet_names_a, worksheet_names_b } = getWorksheetNames(excel_workbook_a, excel_workbook_b);
     // TODO sheet数目不一样，或是有名称不一样，报错。用数组差值方式。
-    console.log(worksheet_names_a, worksheet_names_b);
     // TODO 暂时先修改原文件，在有差别的单元格标红，以后可以改为新建两个备份文件。文件名加后缀可以防止下载到一个目录下重名。
     worksheet_names_a.forEach(name => {
         let worksheet_a = excel_workbook_a.getWorksheet(name);
@@ -25,6 +25,7 @@ async function excelDiffYu(options) {
         }
     });
     writeExcel(excel_workbook_a, excel_workbook_b, options);
+    console.log('sucess');
 }
 
 async function readExcel(options) {
@@ -33,8 +34,8 @@ async function readExcel(options) {
     const excel_path_a = options.pathA || DEFAULT_PATH_A;
     const excel_path_b = options.pathB || DEFAULT_PATH_B;
     // TODO try catch add
-    const excel_workbook_a = await workbook_a.xlsx.readFile(excel_path_a);
-    const excel_workbook_b = await workbook_b.xlsx.readFile(excel_path_b);
+    const excel_workbook_a = await workbook_a.xlsx.readFile(path.resolve(excel_path_a));
+    const excel_workbook_b = await workbook_b.xlsx.readFile(path.resolve(excel_path_b));
     return { excel_workbook_a, excel_workbook_b };
 }
 
@@ -96,15 +97,19 @@ function diffHandle(worksheet_cell_a, worksheet_cell_b) {
     if (worksheet_cell_a.value == worksheet_cell_b.value) {
         return;
     }
+    worksheet_cell_a.style = _.cloneDeep(worksheet_cell_a.style);
+    worksheet_cell_b.style = _.cloneDeep(worksheet_cell_b.style);
     worksheet_cell_a.fill = {
         type: 'pattern',
         pattern: 'solid',
-        fgColor: { argb: 'FFFF0000' }
+        fgColor: { argb: 'FFFF0000' },
+        bgColor: { indexed: 64 }
     };
     worksheet_cell_b.fill = {
         type: 'pattern',
         pattern: 'solid',
-        fgColor: { argb: '00BC00' }
+        fgColor: { argb: 'FF92D050' },
+        bgColor: { indexed: 64 }
     };
 }
 
@@ -118,4 +123,4 @@ function getFormatTime() {
     return `${month}${day}${hours}${minutes}${seconds}`;
 }
 
-module.exports.excelDiffYu = excelDiffYu;
+module.exports.ExcelDiffYu = ExcelDiffYu;
