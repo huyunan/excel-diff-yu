@@ -28,5 +28,9 @@
     "exceljs": "^4.2.0",
     "path": "^0.12.7",
     "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "eslint": "^7.16.0",
+    "eslint-config-standard": "^16.0.2"
   }
 }
